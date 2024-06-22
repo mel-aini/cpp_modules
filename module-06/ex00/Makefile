@@ -1,0 +1,30 @@
+NAME = convert
+
+HEADERS = ScalarConverter.hpp
+
+SRC = main.cpp ScalarConverter.cpp
+
+OBJ = $(SRC:.cpp=.o)
+
+FLAGS = -Wall -Wextra -Werror -std=c++98
+
+all : $(NAME)
+
+$(NAME) : $(OBJ)
+	@c++ $(FLAGS) $(OBJ) -o $@
+
+%.o : %.cpp $(HEADERS)
+	@c++ $(FLAGS) -c $< -o $@
+
+clean :
+	@rm -rf $(OBJ)
+
+fclean : clean
+	@rm -rf $(NAME)
+
+re : fclean all
+
+run : all clean
+	@./$(NAME)
+
+.PHONY : clean fclean re run
